@@ -44,8 +44,29 @@ window.addEventListener('load', (event) => {
   // Bind the click event of each element to a function
   document.querySelectorAll('.card').forEach((card) => {
     card.addEventListener('click', () => {
+      
+      card.classList.toggle("turned")
       // TODO: write some code here
       console.log(`Card clicked: ${card}`);
+
+      const clickedCards = document.querySelectorAll('turned')
+
+      if (clickedCards.length === 2) {
+        const checkingCars = checkIfPair(clickedCards[0],clickedCards[1])
+
+        if (checkingCards === true) {
+          clickedCards.classList.add("blocked")
+          clickedCards = [];
+
+        }
+        else {
+          setTimeout(() => {
+            clickedCards.classList.toggle("turned")
+            clickedCards = [];
+          }, 1000)
+        }
+      }
+
     });
   });
 });
